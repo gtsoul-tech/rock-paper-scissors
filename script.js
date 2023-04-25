@@ -11,24 +11,45 @@ function getComputerChoice(){
     }
 }
 
-function round(playerSelection,computerSelection){
+function playRound(playerSelection,computerSelection){
     let playerSelectionInsesitive = playerSelection.toLowerCase();
+    //0 tie, -1 player lose, 1 player win 
     if(playerSelectionInsesitive === computerSelection){
-        return `Its a tie, You both played ${playerSelectionInsesitive}`;
+        return 0;
     }else if(playerSelectionInsesitive === "rock" && computerSelection === "paper"){
-        return `You lose! Paper beats ${playerSelectionInsesitive}`;
+        return -1;
     }else if(playerSelectionInsesitive === "rock" && computerSelection === "scissors"){
-        return `You Win! Rock beats ${computerSelection}`;
+        return 1;
     }else if(playerSelectionInsesitive === "paper" && computerSelection === "scissors"){
-        return `You lose! Scissors beats ${playerSelectionInsesitive}`;
+        return -1;
     }else if(playerSelectionInsesitive === "paper" && computerSelection === "rock"){
-        return `You Win! Paper beats ${computerSelection}`;
+        return 1;
     }else if(playerSelectionInsesitive === "scissors" && computerSelection === "rock"){
-        return `You Lose! Rock beats ${playerSelectionInsesitive}`;
+        return -1;
     }else if(playerSelectionInsesitive === "scissors" && computerSelection === "paper"){
-        return `You Win! Scissors beats ${computerSelection}`;
+        return 1;
     }
 }
+function game(){
+    let player=0;
+    let computer=0;
+    for(let i=0;i<5;i++){
+        let playerSelection = prompt("Do you want to play Rock,Paper or Scissors?");
+        let result = playRound(playerSelection,getComputerChoice());
+        if(result == -1){
+            computer++;
+        }else if (result == 0){
+            //tie
+        }else if(result == 1){
+            player++;
+        }
+    }
+    if(player > computer){
+        return "Player wins!";
+    }else if(computer> player){
+        return "Computer wins!";
+    }else {
+        return "Its a tie"
+    }
 
-
-console.log(round(getComputerChoice(),getComputerChoice()));
+}
