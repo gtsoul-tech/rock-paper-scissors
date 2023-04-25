@@ -49,7 +49,7 @@ function game(){
     }else if(computer> player){
         return "Computer wins!";
     }else {
-        return "Its a tie"
+        return "Its a tie";
     }
 
 }
