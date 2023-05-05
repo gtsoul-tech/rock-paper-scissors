@@ -1,3 +1,6 @@
+let player=0;
+let computer=0;
+
 function getComputerChoice(){
     let choice= Math.floor(Math.random() * (3 - 1 + 1) + 1);
     if(choice == 1){
@@ -30,11 +33,9 @@ function playRound(playerSelection,computerSelection){
         return 1;
     }
 }
-function game(){
-    let player=0;
-    let computer=0;
-    for(let i=0;i<5;i++){
-        let playerSelection = prompt("Do you want to play Rock,Paper or Scissors?");
+function game(playerSelection){
+    //for(let i=0;i<5;i++){
+        //let playerSelection = prompt("Do you want to play Rock,Paper or Scissors?");
         let result = playRound(playerSelection,getComputerChoice());
         if(result == -1){
             computer++;
@@ -43,13 +44,30 @@ function game(){
         }else if(result == 1){
             player++;
         }
-    }
-    if(player > computer){
-        return "Player wins!";
-    }else if(computer> player){
-        return "Computer wins!";
-    }else {
-        return "Its a tie";
+    //}
+    if(player == 5 || computer ==5){
+        if(player > computer){
+            player=0;
+            computer=0;
+            return "Player wins!";
+        }else if(computer> player){
+            player=0;
+            computer=0;
+            return "Computer wins!";
+        }else {
+            player=0;
+            computer=0;
+            return "Its a tie";
+        }
+    }else{
+        return "Player: " + player + "| Computer: " + computer;
     }
 
 }
+const resultDiv= document.querySelector("#results");
+const buttons = document.querySelectorAll('button');
+const arrayButtons = Array.prototype.slice.call(buttons);
+for(let i=0;i<arrayButtons.length;i++){
+    arrayButtons[i].addEventListener("click",() => {resultDiv.textContent =game(arrayButtons[i].value);});
+}
+
